@@ -1,259 +1,208 @@
-# ✨ Power BI Modeling MCP Server
+﻿# COVID-19 Analytics - Power BI Semantic Model Built with MCP
 
-The **Power BI Modeling MCP Server** implements the [MCP specification](https://modelcontextprotocol.io/introduction) to create a seamless connection between AI agents and Power BI semantic models. This project is in Public Preview and implementation may significantly change prior to our General Availability.
-
-The **Power BI Modeling MCP Server** brings Power BI semantic modeling capabilities to your AI agents through a **local MCP server**. This allows developers and AI applications to interact with Power BI models in entirely new ways, from using natural language to execute modeling changes to autonomous AI agentic development workflows.
+> A production-grade COVID-19 analytics semantic model created entirely through AI-assisted, infrastructure-as-code workflows using the [Power BI Modeling MCP Server](https://github.com/microsoft/powerbi-modeling-mcp).
 
 ![powerbi-modeling-mcp-diagram](docs/img/e2e-diagram.png)
 
-## 💡 What can you do?
+---
 
-- **🔄 Build and Modify Semantic Models with Natural Language** - Tell your AI assistant what you need, and it uses this MCP server to create, update, and manage tables, columns, measures, relationships, and more... across Power BI Desktop and Fabric semantic models.
+## What This Project Is
 
-- **⚡ Bulk Operations at Scale** - AI applications can execute batch modeling operations on hundreds of objects simultaneously — bulk renaming, bulk refactoring, model translations, or model security rules - with transaction support and error handling, turning hours of repetitive work into seconds.
+This repository demonstrates how the **Power BI Modeling MCP (Model Context Protocol) Server** can be used to build a comprehensive, enterprise-quality Power BI semantic model from the ground up - without ever opening the Power BI Desktop modeling UI.
 
-- **✅ Apply modeling best practices** - Easily evaluate and implement modeling best practices against your model.
+Every measure, calculated column, relationship, security role, translation, and calculation group in this model was authored through natural language prompts to an AI agent connected to the MCP server. The result is a fully functional COVID-19 analytics model that is **version-controlled, repeatable, testable, and deployable through CI/CD pipelines**.
 
-- **🤖 Agentic Development Workflows** - Supports working with [TMDL and Power BI Project files](https://learn.microsoft.com/power-bi/developer/projects/projects-dataset#tmdl-format), enabling AI agents to autonomously plan, create, and execute complex modeling tasks across your semantic model codebase.
+---
 
-- **🔍 Query and Validate DAX** - AI assistants can execute and validate DAX queries against your model, helping you test measures, troubleshoot calculations, and explore your data
+## Model at a Glance
 
-📹 Watch the video for an [end-to-end demo](https://aka.ms/power-modeling-mcp-demo).
+| Dimension | Detail |
+|---|---|
+| **Measures** | 79 DAX measures across 20 categories |
+| **Tables** | 10 tables (including calculation groups) |
+| **Columns** | 61 columns (including calculated columns with Census data) |
+| **Relationships** | 3 (COVID -> StateDim, COVID -> Calendar) |
+| **Security Roles** | 3 - Regional Manager, State Manager, Executive |
+| **Cultures / Translations** | 3 - English (en-US), Spanish (es-ES), French (fr-FR) |
+| **Calculation Groups** | 2 - Time Intelligence (6 items), Currency Conversion |
+| **Report Pages** | Executive Dashboard, Regional Analysis, Time Intelligence, Advanced Analytics |
 
-> [!WARNING]  
-> - Use caution when connecting an AI Agent to a semantic model. The underlying LLM may produce unexpected or inaccurate results, which could lead to unintended changes. **Always create a backup of your model before performing any operations.** 
-> - LLMs might unintentionally expose sensitive information from the semantic model, including data or metadata, in logs or responses. **Exercise caution when sharing chat sessions.**
-> - The **Power BI Modeling MCP server** can only execute modeling operations. It cannot modify other types of Power BI metadata, such as report pages or semantic model elements like diagram layouts.
-> - The AI model you select directly influences the quality and relevance of the responses you receive. For the best results, choose a deep-reasoning model such as `GPT-5` or `Claude Sonnet 4.5`. You can find more details about available models in the [documentation](https://docs.github.com/en/copilot/reference/ai-models/model-comparison).
+---
 
+## Key Capabilities Demonstrated
 
-## 📦 Installation
+### Semantic Modeling as Code
+Every object in the model - tables, measures, columns, relationships - was created and modified through MCP commands, not manual UI clicks. This makes the entire model reproducible and auditable.
 
-The easiest way to install this MCP Server is by using the **Visual Studio Code extension** extension together with **GitHub Copilot**. However, you can also manually install it in any other MCP client.
+### 79 DAX Measures Organized in 17 Display Folders
+From executive KPIs (`Total Cases`, `Case Fatality Rate %`) to epidemiological metrics (`Estimated R Value`, `Doubling Time Days`) to data quality checks (`Data Completeness %`, `Anomaly Days Count`). Full documentation in [COVID_Measures_Documentation.md](COVID_Measures_Documentation.md).
 
-### Visual Studio Code (Recommended)
+### Row-Level Security (RLS)
+Three security roles provide multi-tenant data access:
+- **Regional Manager** - filtered to specific US Census regions
+- **State Manager** - filtered to individual states
+- **Executive** - unrestricted access
 
-1. Install [Visual Studio Code](https://code.visualstudio.com/download).
-2. Install the [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions.
-3. Install the [**Power BI Modeling MCP** Visual Studio Code extension](https://aka.ms/powerbi-modeling-mcp-vscode).
-   
-	![vs code install](docs/img/vscode-extension-install.png)
+### Calculation Groups for Time Intelligence
+A single measure produces six time perspectives (Current, YTD, Prior Year, YoY Growth %, MTD, QTD) - eliminating measure proliferation entirely.
 
-4. Open [GitHub Copilot chat](https://code.visualstudio.com/docs/copilot/chat/copilot-chat) and confirm the **powerbi-modeling-mcp** is available and selected.
-   
-	![vscode-mcp-tools](docs/img/vscode-mcp-tools.png)
+### Multi-Language Support
+Model metadata translated into Spanish (11 translations) and French (5 translations), managed programmatically through the MCP server.
 
-### Manual install
+### Per-Capita Analysis with Census Data
+Calculated columns embed 2020 US Census population data directly into the model, enabling per-capita metrics like `Cases Per 100K Population` and `Deaths Per 100K Population`.
 
-This MCP Server can also be configured across other IDEs, CLIs, and MCP clients:
+### Advanced Analytics
+Epidemiological measures including `Trend Classification`, `Weekly Case Acceleration`, `14-Day Notification Rate` (WHO standard), and an auto-generated `Executive Summary` narrative measure.
 
-1. Download the latest version of the vsix here: [win32-x64](https://marketplace.visualstudio.com/_apis/public/gallery/publishers/analysis-services/vsextensions/powerbi-modeling-mcp/0.1.8/vspackage?targetPlatform=win32-x64)	
-2. Rename the downloaded `.visx` file to `.zip`
-3. Unzip the contents to a folder of your choice, for example: `C:\MCPServers\PowerBIModelingMCP`
-4. Run `\extension\server\powerbi-modeling-mcp.exe`
-5. Copy the MCP JSON registration from the console and register it in your preferred MCP client tool.
+---
 
-Example of config that should work in most MCP clients:
+## Repository Contents
 
-```json
-{
-"servers": {
-		"powerbi-modeling-mcp": {
-			"type": "stdio",
-			"command": "C:\\MCPServers\\PowerBIModelingMCP\\extension\\server\\powerbi-modeling-mcp.exe",
-			"args": [
-				"--start"                
-			],
-			"env": {}			
-		}
-	}
-}
+| File | Description |
+|---|---|
+| [COVID_Measures_Documentation.md](COVID_Measures_Documentation.md) | Complete reference of all 79 DAX measures organized by category with descriptions and business purpose |
+| [COVID_Analytics_Demo_Script.md](COVID_Analytics_Demo_Script.md) | Step-by-step 15-20 minute demo script walking through every feature of the model |
+| [Healthcare_Demo_Questions.md](Healthcare_Demo_Questions.md) | 25+ advanced demo questions organized by theme: data quality, clinical insights, security, performance, localization |
+| [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Guide for diagnosing and resolving common MCP server issues |
+| [CHANGELOG.md](CHANGELOG.md) | Release history for the upstream Power BI Modeling MCP Server |
+| [docs/img/](docs/img/) | Architecture diagrams and VS Code screenshots |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) + [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions
+- [Power BI Modeling MCP extension](https://aka.ms/powerbi-modeling-mcp-vscode) for VS Code
+
+### Install the MCP Server
+
+1. Install the [Power BI Modeling MCP VS Code extension](https://aka.ms/powerbi-modeling-mcp-vscode).
+
+   ![vs code install](docs/img/vscode-extension-install.png)
+
+2. Open GitHub Copilot Chat and confirm the **powerbi-modeling-mcp** server is available.
+
+   ![vscode-mcp-tools](docs/img/vscode-mcp-tools.png)
+
+### Connect to the Model
+
+Open the COVID Testing `.pbix` file in Power BI Desktop, then in VS Code:
+
+```
+Connect to 'COVID Testing' in Power BI Desktop
 ```
 
-## 🚀 Get started
+Verify the connection:
 
-**First, you must connect to a Power BI semantic model**, which can reside in Power BI Desktop, Fabric workspace or in Power BI Project (PBIP) files.
-
-- **For Power BI Desktop:** 
-
-	```
-	Connect to '[File Name]' in Power BI Desktop
-	```
-
-- **For Semantic Model in Fabric Workspace:**
-
-	```
-	Connect to semantic model '[Semantic Model Name]' in Fabric Workspace '[Workspace Name]'
-	```
-  
-- **For Power BI Project files:**
-
-	```
-	Open semantic model from PBIP folder '[Path to the definition/ TMDL folder in the PBIP]'
-	```
-
-Once the connection is established, you can use natural language to ask the AI agent to make any modeling changes. To get started, try one of the following scenarios.
-
-### Example scenarios
-
-
-| Scenario                                                | Prompt examples                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Analyze naming convention and bulk rename.              | `Analyze my model’s naming conventions and suggest renames to ensure consistency.`<br>`Analyze the naming convention of the ‘Sales’ table and apply the same pattern across the entire model.`                                                                                                                                                                                                         |
-| Set descriptions across your model for documentation.   | `Add descriptions to all measures, columns, and tables to clearly explain their purpose and explain the logic behind the DAX code in simple, understandable terms.`                                                                                                                                                                                                                                    |
-| Translate your semantic model.                          | `Generate a French translation for my model including tables, columns and measures.`                                                                                                                                                                                                                                                                                                                   |
-| Refactor measures into Calculation Groups or UDF.       | `Refactor measures 'Sales Amount 12M Avg' and 'Sales Amount 6M Avg' into a calculation group and include new variants: 24M and 3M.`                                                                                                                                                                                                                                                                    |
-| Refactor your queries to use semantic model parameters. | `Analyze the Power Query code for all tables, identify the data source configuration, and create semantic model parameters to enable easy switching of the data source location.`                                                                                                                                                                                                                      |
-| Benchmark DAX queries against multiple models.          | `Connect to semantic model 'V1' and 'V2. And benchmark the following DAX query against both models. [DAX Query] `                                                                                                                                                                                                                                                                                      |
-| Document your semantic model                            | `Generate a Markdown document (.md) that provides complete, professional documentation for a Power BI Semantic Model. Use a simple mermaid diagram to ilustrate the table relationships; Document each measure including the DAX code and a description of the business logic using business friendly names; Document row level filters; Document the data sources by analyzing the Power Query code.` |
-
-> [!TIP]
-> The scenarios above are just examples. This MCP server equips your agents with modeling tools for any type of model change, and with the right prompt and context, you can automate virtually any modeling task.
-
-### Confirmation prompts
-
-This MCP Server supports the [Elicitation MCP protocol](https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation), requiring user approval for the following actions:
-
-- Before the first modification made to a semantic model.
-- Before the first query executed against a semantic model.
-
-![mcp-server-elicitation](docs/img/mcp-server-elicitation.png)
-
-> [!TIP]
-> You can configure the MCP to skip these confirmations by using the `--skipconfirmation` option. 
-
-## 🛠️ Available tools
-
-| Tool Name                               | What It Does                                                                                                   |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **connection_operations**               | Connect to Power BI Desktop or Fabric workspaces                                                               |
-| **database_operations**                 | Manage semantic models - connect, create, update, list databases, import/export TMDL folders, deploy to Fabric |
-| **transaction_operations**              | Control database transactions (begin, commit, rollback, get status)                                            |
-| **model_operations**                    | Work with the overall model (get, create, update, refresh, get stats, rename)                                  |
-| **table_operations**                    | Manage tables (create, update, delete, get, list, refresh, rename)                                             |
-| **column_operations**                   | Manage individual table columns (create, update, delete, get, list, rename)                                    |
-| **measure_operations**                  | Manage individual DAX measures (create, update, delete, get, list, rename, move between tables)                |
-| **relationship_operations**             | Handle relationships between tables (create, update, delete, activate/deactivate, find)                        |
-| **dax_query_operations**                | Execute, validate, and generate DAX queries against the model                                                  |
-| **trace_operations**                    | Perform trace operations on semantic model to capture and analyze Analysis Services events.                    |
-| **partition_operations**                | Manage table partitions (create, update, delete, refresh specific partitions)                                  |
-| **user_hierarchy_operations**           | Work with user-defined hierarchies (create, update, delete levels, reorder)                                    |
-| **calculation_group_operations**        | Manage calculation groups and calculation items for time intelligence and other calculations                   |
-| **security_role_operations**            | Configure security roles and row-level security (RLS) table permissions                                        |
-| **perspective_operations**              | Manage perspectives and their members (filtered views of the model for different audiences)                    |
-| **named_expression_operations**         | Work with named expressions and Power Query parameters (create, update, delete, get, list, rename)             |
-| **function_operations**                 | Manage individual DAX user-defined functions                                                                   |
-| **culture_operations**                  | Manage cultures for multi-language support (create, update, delete, get valid culture names)                   |
-| **object_translation_operations**       | Handle translations for model objects across different cultures/languages                                      |
-| **calendar_operations**                 | Manage calendar objects and time intelligence column groups                                                    |
-| **query_group_operations**              | Organize and manage query groups for Power Query expressions                                                   |
-| **batch_table_operations**              | Perform bulk operations on tables (create, update, delete, get, rename multiple tables)                        |
-| **batch_column_operations**             | Perform bulk operations on table columns (create, update, delete, get, rename multiple columns at once)        |
-| **batch_measure_operations**            | Perform bulk operations on measures (create, update, delete, get, rename, move multiple measures)              |
-| **batch_function_operations**           | Perform bulk operations on DAX functions (create, update, delete, get, rename multiple functions)              |
-| **batch_perspective_operations**        | Bulk manage perspective members (tables, columns, measures, hierarchies)                                       |
-| **batch_object_translation_operations** | Bulk create, update, delete, or get object translations across cultures                                        |
-
-> [!NOTE]
-> This project is in Public Preview and tools may significantly change prior to our General Availability.
-
-## ▶️ Available prompts
-
-This MCP server includes built-in prompts to help you get started. In **Visual Studio Code**, access the available MCP prompts by typing the `/` command in the chat.
-
-![vscode-mcp-prompts](docs/img/vscode-mcp-prompts.png)
-
-| Prompt Name                 | What It Does                                                                                                                                                                                   |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **CreateDAXQuery**          | Creates a DAX query from your semantic model and natural language question. Attaches the `dax_query_instructions_and_examples` resource to provide the LLM with DAX language context.           |
-| **RunDAXQueryWithMetrics**  | Executes the DAX query with option to clear the cache and return only the execution metrics.                                                                                                    |
-| **AnalyzeDAXQuery**         | Analyzes DAX query performance by running it with a cleared cache and reviewing execution metrics for potential issues.                                                                         |
-| **ConnectToPowerBIDesktop** | Searches for the Power BI Desktop Analysis Services instance that matches the file name and connects to it.                                                                                    |
-| **ConnectToFabric**         | Connects to a semantic model in a Fabric Workspace.                                                                                                                                            |
-| **ConnectToPBIP** | Loads the TMDL definition from the semantic model in the Power BI Project files. Attaches the `powerbi_project_instructions` resource to provide the LLM with Power BI Project (PBIP) context. |
-
-> [!NOTE]
-> Some prompts also attach resources that provide important context for the LLM.
-
-## ⚙️ Settings
-
-The MCP server supports several command line options:
-
-| Option               | Default | Description                                                                                                                                                                                                               |
-| -------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--start`            |         | Starts the MCP server; necessary for server registration with MCP client.                                                                                                                                                 |
-| `--readwrite`        | Yes     | Enabled by default, enables write operations with confirmation prompt before applying an edit to your semantic model (once per database).                                                                                 |
-| `--readonly`         |         | Safe mode, prevents any write operations to your semantic model                                                                                                                                                           |
-| `--skipconfirmation` |         | Automatically approves all write operations without confirmation prompts. Only use skip confirmation mode when you're confident about the operations being performed and have appropriate backups of your semantic model. |
-| `--compatibility`    | PowerBI | By default, it is optimized for Power BI semantic models. Change the setting to `Full` if you want to run this MCP server against Analysis Services databases.                                                            |
-
-**For Visual Studio Code**, you can set the command line options configuring the `args` setting:
-
-Open **Visual Studio Code** [user settings](https://code.visualstudio.com/docs/configure/settings#_settings-editor) and search for `@ext:Microsoft.powerbi-modeling-mcp`.
-
-![VS Code settings](docs/img/vscode-mcp-settings.png)
-
-**For Manual installations**, you can set the command line options configuring the `args` property in the MCP Server registration JSON:
-
-```json
-{
-"servers": {
-		"powerbi-modeling-mcp": {
-			"command": "[Path To MCP Server folder]\\powerbi-modeling-mcp.exe",
-			"args": [
-				"--start"
-                , "--skipconfirmation"
-			],
-			"env": {},
-			"type": "stdio"
-		}
-	}
-}
+```
+Get model statistics for the connected database
 ```
 
-## 💬 Feedback and Support
+### Explore the Model
 
-- Check the [Troubleshooting guide](TROUBLESHOOTING.md) to diagnose and resolve common issues.
-- We're building this in the open. Your feedback is much appreciated, and will help us shape the future of the Power BI Modeling MCP server.
-    - 👉 [Open an issue](../../issues) in the public GitHub repository - we’d love to hear from you!
+Try these prompts to see the model in action:
 
-## Considerations and limitations
+```
+List all measures and their display folders
+```
 
-- Connecting to a Semantic Model in a Fabric workspace may not work in your tenant due to the ongoing rollout of the client ID used for authentication. 
-- This MCP server follows the same rules and behaviors as modeling operations performed by External Tools. Refer to the [documentation](https://learn.microsoft.com/power-bi/transform-model/desktop-external-tools#data-modeling-operations) for more information.
+```
+Get the DAX expression for [Executive Summary]
+```
 
-## Security
+```
+List security roles in the model
+```
 
-Your credentials are always handled securely through the official [Azure Identity SDK](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md) - **we never store or manage tokens directly**.
+```
+List cultures and translation counts
+```
 
-MCP as a phenomenon is very novel and cutting-edge. As with all new technology standards, consider doing a security review to ensure any systems that integrate with MCP servers follow all regulations and standards your system is expected to adhere to. This includes not only the Power BI Modeling MCP Server, but any MCP client/agent that you choose to implement down to the model provider.
+For a complete guided walkthrough, see the [Demo Script](COVID_Analytics_Demo_Script.md).
 
-You should follow Microsoft security guidance for MCP servers, including enabling Entra ID authentication, secure token management, and network isolation. Refer to [Microsoft Security Documentation](https://learn.microsoft.com/en-us/azure/api-management/secure-mcp-servers) for details.
+---
 
-## Permissions and Risk
+## Measure Categories
 
-MCP clients can invoke operations based on the user’s Fabric RBAC permissions. Autonomous or misconfigured clients may perform destructive actions. You should review and apply least-privilege RBAC roles and implement safeguards before deployment. Certain safeguards, such as flags to prevent destructive operations, are not standardized in the MCP specification and may not be supported by all clients.
+The model's 79 measures span 20 categories:
 
-## Data Collection
+| Category | Examples |
+|---|---|
+| **Executive KPIs** | Total Cases, Total Deaths, Case Fatality Rate %, Active Cases |
+| **Core Metrics** | Cases Per 100K, Daily New Cases, Daily New Deaths |
+| **Trending** | 7-Day Moving Average, Growth Rate % |
+| **Time Intelligence** | YTD Cases, PY Cases, % Change vs PY |
+| **Advanced Analytics** | Running Total Cases, Peak Date, % of Total Cases |
+| **Epidemiological** | Estimated R Value, Doubling Time, Trend Classification, Weekly Case Acceleration |
+| **Per Capita** | Cases Per 100K Population, Deaths Per 100K Population, Attack Rate |
+| **Comparative** | Best State, Worst State, State vs National Average, Percentile Rank |
+| **Data Quality** | Data Completeness %, Anomaly Days Count, Zero Reporting Days |
+| **Risk Assessment** | Risk Level (WHO-based classification) |
+| **Narrative** | Executive Summary (auto-generated), Traffic Light Status, Momentum Score |
+| **Forecasting** | 14-Day Forecast |
 
-The software may collect information about you and your use of the software and send it to Microsoft. Microsoft may use this information to provide services and improve our products and services. There are also some features in the software that may enable you and Microsoft to collect data from users of your applications. If you use these features, you must comply with applicable law, including providing appropriate notices to users of your applications together with a copy of Microsoft's [privacy statement](https://www.microsoft.com/privacy/privacystatement). You can learn more about data collection and use in the help documentation and our privacy statement. Your use of the software operates as your consent to these practices.
+See [COVID_Measures_Documentation.md](COVID_Measures_Documentation.md) for the complete reference.
 
-## Compliance Responsibility
+---
 
-This MCP server may be installed, used and share data with third party clients and services, such as third party LLMs that operate outside Microsoft compliance boundaries. You are responsible for ensuring that any integration complies with applicable organizational, regulatory, and contractual requirements.
+## Why Infrastructure-as-Code for Semantic Models?
 
-## Third Party Components
+| Benefit | How This Project Demonstrates It |
+|---|---|
+| **Version Control** | Every measure and role is text in Git - review in PRs, rollback when needed |
+| **Repeatability** | The entire model can be recreated from MCP commands - no tribal knowledge |
+| **Testing** | DAX measures can be validated programmatically; security roles can be tested |
+| **CI/CD** | Export to TMDL, deploy through pipelines: Dev -> Test -> Prod |
+| **Documentation** | The code IS the documentation - queryable, auditable, always current |
+| **Scale** | 79 measures created in minutes through batch operations, not days of manual work |
+| **Governance** | Audit trail of every change, enforced naming standards, peer review before production |
 
-This MCP server may use or depend on third party components.  You are responsible for reviewing and complying with the licenses and security posture of any third-party components.
+---
 
-## Export Control
+## Demo Resources
 
-Use of this software must comply with all applicable export laws and regulations, including U.S. Export Administration Regulations and local jurisdiction requirements.
+This repository includes two comprehensive demo guides:
 
-## No Warranty / Limitation of Liability
+- **[COVID_Analytics_Demo_Script.md](COVID_Analytics_Demo_Script.md)** - A 15-20 minute structured walkthrough covering model statistics, executive dashboards, regional drill-through, time intelligence calculation groups, row-level security, and advanced analytics. Includes narration scripts and talking points.
 
-This software is provided “as is” without warranties or conditions of any kind, either express or implied. Microsoft shall not be liable for any damages arising from use, misuse, or misconfiguration of this software.
+- **[Healthcare_Demo_Questions.md](Healthcare_Demo_Questions.md)** - 25+ questions organized into categories (data quality, clinical insights, security, performance, localization, calculation groups) with MCP commands and expected outputs. Includes a "killer demo sequence" and objection handlers.
 
-## Code of Conduct
+---
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [open@microsoft.com](mailto:open@microsoft.com) with any additional questions or comments.
+## Built With
+
+This project is built on top of the **[Power BI Modeling MCP Server](https://github.com/microsoft/powerbi-modeling-mcp)** by Microsoft - an open-source MCP server that brings Power BI semantic modeling capabilities to AI agents.
+
+Refer to the [upstream repository](https://github.com/microsoft/powerbi-modeling-mcp) for full documentation on:
+- [Available MCP tools and operations](https://github.com/microsoft/powerbi-modeling-mcp#%EF%B8%8F-available-tools)
+- [Built-in prompts](https://github.com/microsoft/powerbi-modeling-mcp#%EF%B8%8F-available-prompts)
+- [Configuration and settings](https://github.com/microsoft/powerbi-modeling-mcp#%EF%B8%8F-settings)
+- [Manual installation for other MCP clients](https://github.com/microsoft/powerbi-modeling-mcp#manual-install)
+
+---
+
+## Troubleshooting
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for common issues including MCP server logging, restarting the server, and locating binaries.
+
+---
+
+## Legal
+
+- [MIT License](LICENSE)
+- [Microsoft Open Source Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security Policy](SECURITY.md)
+- [Support](SUPPORT.md)
+
+### Data Collection
+
+The underlying MCP server software may collect usage information and send it to Microsoft. Review the [Microsoft Privacy Statement](https://www.microsoft.com/privacy/privacystatement) for details.
+
+### Disclaimer
+
+This software is provided "as is" without warranties of any kind. Always back up your semantic model before performing operations through any MCP client. LLMs may produce unexpected results - exercise caution and review all changes before committing.
