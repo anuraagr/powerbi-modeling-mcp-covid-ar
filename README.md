@@ -1,6 +1,6 @@
 ﻿# COVID-19 Analytics: Building an Enterprise Semantic Model with AI and MCP
 
-I built a complete, production-grade Power BI COVID-19 analytics model entirely through natural language conversations with an AI agent. No manual UI clicks. No drag-and-drop. Every measure, relationship, security role, translation, and calculation group was created programmatically using the [Power BI Modeling MCP Server](https://github.com/microsoft/powerbi-modeling-mcp) - Microsoft's open-source Model Context Protocol server that connects AI agents to Power BI semantic models.
+I built a Power BI COVID-19 analytics model entirely through natural language conversations with an AI agent. No manual UI clicks. No drag-and-drop. Every measure, relationship, security role, translation, and calculation group was created programmatically using the [Power BI Modeling MCP Server](https://github.com/microsoft/powerbi-modeling-mcp) - Microsoft's open-source Model Context Protocol server that connects AI agents to Power BI semantic models.
 
 This repository documents what I built, how the model is structured, and why this approach matters for enterprise BI development.
 
