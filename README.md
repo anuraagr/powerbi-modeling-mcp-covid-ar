@@ -208,14 +208,18 @@ For full MCP server documentation — available tools, prompts, configuration op
 
 ```
 README.md                  - This document
+CONTRIBUTING.md            - How to contribute
 CHANGELOG.md               - Release history
 TROUBLESHOOTING.md         - Diagnosing common MCP server issues
 SUPPORT.md                 - How to get help
 LICENSE                    - MIT License
 CODE_OF_CONDUCT.md         - Microsoft Open Source Code of Conduct
 SECURITY.md                - Security reporting policy
+.markdownlint.json         - Markdown linting configuration
 docs/img/                  - Architecture diagrams and screenshots
-.github/ISSUE_TEMPLATE/    - Bug report and feature request templates
+.github/ISSUE_TEMPLATE/    - Bug report and feature request forms
+.github/workflows/         - CI validation for markdown
+.github/PULL_REQUEST_TEMPLATE.md - PR description template
 ```
 
 ---
@@ -232,7 +236,7 @@ docs/img/                  - Architecture diagrams and screenshots
 
 ## Legal
 
-[MIT License](LICENSE) | [Code of Conduct](CODE_OF_CONDUCT.md) | [Security](SECURITY.md) | [Support](SUPPORT.md)
+[MIT License](LICENSE) | [Code of Conduct](CODE_OF_CONDUCT.md) | [Contributing](CONTRIBUTING.md) | [Security](SECURITY.md) | [Support](SUPPORT.md)
 
 The underlying MCP server software may collect usage information. See the [Microsoft Privacy Statement](https://www.microsoft.com/privacy/privacystatement).
 
