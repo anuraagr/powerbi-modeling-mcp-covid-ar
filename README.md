@@ -38,33 +38,33 @@ A COVID-19 analytics semantic model built on US county-level case and death data
 
 The 79 measures are organized into display folders that reflect how a healthcare analytics team would actually use them:
 
-**Executive KPIs** - Total Cases, Total Deaths, Case Fatality Rate % (marked SENSITIVE for executive-only access), Active Cases
+**Executive KPIs** — Total Cases, Total Deaths, Case Fatality Rate % (marked SENSITIVE for executive-only access), Active Cases
 
-**Core Metrics** - Cases Per 100K, Daily New Cases, Daily New Deaths, Case Fatality Rate
+**Core Metrics** — Cases Per 100K, Daily New Cases, Daily New Deaths, Case Fatality Rate
 
-**Trending** - 7-Day Moving Average (smooths daily volatility), Growth Rate % (week-over-week expansion/contraction)
+**Trending** — 7-Day Moving Average (smooths daily volatility), Growth Rate % (week-over-week expansion/contraction)
 
 **Time Intelligence** — 7-Day Avg Cases, YTD Cases, Prior Year Cases, % Change vs PY
 
-**Epidemiological** - Estimated R Value (reproduction number from 7-day case growth), Doubling Time Days, 14-Day Notification Rate (WHO standard), Trend Classification (Rising/Stable/Declining based on growth thresholds), Weekly Case Acceleration (surge prediction indicator), Case Acceleration
+**Epidemiological** — Estimated R Value (reproduction number from 7-day case growth), Doubling Time Days, 14-Day Notification Rate (WHO standard), Trend Classification (Rising/Stable/Declining based on growth thresholds), Weekly Case Acceleration (surge prediction indicator), Case Acceleration
 
-**Per Capita** - Cases Per 100K Population, Deaths Per 100K Population, Attack Rate (% of population infected)
+**Per Capita** — Cases Per 100K Population, Deaths Per 100K Population, Attack Rate (% of population infected)
 
-**Comparative** - Best State, Worst State (by per-capita rate), State vs National Average, Percentile Rank, State Rank Per Capita
+**Comparative** — Best State, Worst State (by per-capita rate), State vs National Average, Percentile Rank, State Rank Per Capita
 
-**Advanced Analytics** - Running Total Cases, Peak Date, Peak Daily Cases, Days Since Peak, % of Total Cases, Avg Daily New Cases
+**Advanced Analytics** — Running Total Cases, Peak Date, Peak Daily Cases, Days Since Peak, % of Total Cases, Avg Daily New Cases
 
-**Data Quality** - Data Completeness %, Data Freshness (Days), Anomaly Days Count (dates with >3x 7-day average spikes), Zero Reporting Days, County Reporting Rate
+**Data Quality** — Data Completeness %, Data Freshness (Days), Anomaly Days Count (dates with >3x 7-day average spikes), Zero Reporting Days, County Reporting Rate
 
-**Risk Assessment** - Risk Level (WHO-based: Extreme, High, Moderate, Low, Minimal)
+**Risk Assessment** — Risk Level (WHO-based: Extreme, High, Moderate, Low, Minimal)
 
-**Narrative & Insights** - Executive Summary (auto-generated narrative with multiple VARs and business logic), Traffic Light Status (Green/Yellow/Red), Is Worst Week, Momentum Score (acceleration + growth combined)
+**Narrative & Insights** — Executive Summary (auto-generated narrative with multiple VARs and business logic), Traffic Light Status (Green/Yellow/Red), Is Worst Week, Momentum Score (acceleration + growth combined)
 
 **Forecasting** — 14-Day Forecast (based on current 7-day average and growth rate)
 
-**Testing, Hospitalization, Vaccination, Demographics, Policy** - Placeholder measures scaffolded for future data source integration (Test Positivity Rate, ICU Occupancy %, Vaccine Effectiveness, etc.)
+**Testing, Hospitalization, Vaccination, Demographics, Policy** — Placeholder measures scaffolded for future data source integration (Test Positivity Rate, ICU Occupancy %, Vaccine Effectiveness, etc.)
 
-**Metadata** - Updated timestamp, Max date, Methodology, Terms of use, Drill-through button text
+**Metadata** — Updated timestamp, Max date, Methodology, Terms of use, Drill-through button text
 
 ### Row-Level Security
 
@@ -206,9 +206,9 @@ For full MCP server documentation — available tools, prompts, configuration op
 
 ## Repository Structure
 
-`
+```
 README.md                  - This document
-CHANGELOG.md               - Release history for the upstream MCP server
+CHANGELOG.md               - Release history
 TROUBLESHOOTING.md         - Diagnosing common MCP server issues
 SUPPORT.md                 - How to get help
 LICENSE                    - MIT License
@@ -216,7 +216,7 @@ CODE_OF_CONDUCT.md         - Microsoft Open Source Code of Conduct
 SECURITY.md                - Security reporting policy
 docs/img/                  - Architecture diagrams and screenshots
 .github/ISSUE_TEMPLATE/    - Bug report and feature request templates
-`
+```
 
 ---
 
