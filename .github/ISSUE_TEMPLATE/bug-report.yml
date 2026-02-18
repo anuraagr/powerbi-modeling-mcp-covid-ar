@@ -1,0 +1,52 @@
+name: Bug Report
+description: Report a bug or documentation issue
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before filing:** If the bug is in the Power BI Modeling MCP Server itself (not this demo repo), please file it in the [upstream repository](https://github.com/microsoft/powerbi-modeling-mcp/issues).
+  - type: input
+    id: mcp-version
+    attributes:
+      label: MCP Server Version
+      description: Version of the Power BI Modeling MCP extension (e.g., 0.1.9)
+      placeholder: "0.1.9"
+    validations:
+      required: false
+  - type: input
+    id: model
+    attributes:
+      label: LLM Model
+      description: Which model were you using?
+      placeholder: "Claude Sonnet 4, GPT-4.1, etc."
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+    validations:
+      required: false
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Screenshots, chat exports, output window logs, etc.
+    validations:
+      required: false

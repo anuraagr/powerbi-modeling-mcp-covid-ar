@@ -1,0 +1,25 @@
+name: Feature Request
+description: Suggest an improvement or new measure idea
+labels: [enhancement]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the feature or measure idea
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Why is this needed? How would it improve the demo?
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other details, examples, or screenshots
+    validations:
+      required: false

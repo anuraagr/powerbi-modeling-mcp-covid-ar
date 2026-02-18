@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Power BI Modeling MCP Server Issues
+    url: https://github.com/microsoft/powerbi-modeling-mcp/issues
+    about: For bugs or features related to the MCP server itself, file in the upstream repo
+  - name: Power BI Community
+    url: https://community.powerbi.com/
+    about: General Power BI and DAX questions
